@@ -66,3 +66,4 @@ exports('CompleteJob', function(src, jobId, success)
         TriggerClientEvent('ox_lib:notify', src, {type='error', description='Zakázka selhala.'})
     end
 end)
+
