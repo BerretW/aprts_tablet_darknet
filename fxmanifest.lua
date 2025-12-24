@@ -1,16 +1,30 @@
 fx_version 'cerulean'
 lua54 'yes'
 
+name 'aprts_tablet_darknet'
+description 'Modular Darknet Market'
 author 'AI'
-version '1.0.0'
-description 'Darknet Market for aprts_tablet'
+version '2.5.0'
 games {"gta5"}
-shared_scripts {'@ox_lib/init.lua', 'config.lua', 'missions/atm_rob/shared.lua'}
 
-server_scripts {'server.lua', 'missions/atm_rob/server.lua'}
-client_scripts {'client.lua', 'missions/atm_rob/client.lua'}
+shared_scripts { '@ox_lib/init.lua', 'config.lua' }
 
-dependencies {'aprts_tablet', 'oxmysql'}
+-- Načteme hlavní klient a server
+client_script 'client.lua'
+server_script 'server.lua'
 
-exports {'CompleteJob' -- Export pro dokončení jobu a získání odměny
+-- Načteme všechny mise (globálně)
+client_scripts {
+    'missions/delivery/client.lua',
+    'missions/heist/client.lua',
+    'missions/drug_sale/client.lua' -- NOVÉ
 }
+
+files {
+    'install.sql',
+    'web/index.html',
+    'web/style.css',
+    'web/script.js'
+}
+
+dependencies { 'aprts_tablet', 'oxmysql' }

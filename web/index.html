@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="nui://aprts_tablet_darknet/web/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<div class="darknet-wrapper">
+    <!-- Skrytá data -->
+    <input type="hidden" id="my-serial" value="{{SERIAL}}">
+    
+    <!-- Hlavička -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-user-secret"></i> SILK_ROAD <span style="font-size:10px; opacity:0.5;">v2.0</span>
+        </div>
+        <div class="rep-box">
+            <small>REPUTACE</small>
+            <span id="display-rep">0</span>
+        </div>
+    </div>
+
+    <!-- Navigace -->
+    <div class="nav">
+        <button class="nav-btn active" onclick="DarknetApp.switchView('system')">SYSTÉM</button>
+        <button class="nav-btn" onclick="DarknetApp.switchView('market')">TRH HRÁČŮ</button>
+        <button class="nav-btn" onclick="DarknetApp.switchView('myjobs')">MOJE ZAKÁZKY</button>
+    </div>
+
+    <!-- Obsah -->
+    <div id="content-area" class="content">
+        <!-- Zde se dynamicky generuje obsah -->
+    </div>
+
+    <!-- Modální okno pro Chat -->
+    <div id="chat-modal" class="chat-modal" style="display:none;">
+        <div class="chat-header">
+            <span>ŠIFROVANÉ SPOJENÍ</span>
+            <button onclick="DarknetApp.closeChat()">X</button>
+        </div>
+        <div id="chat-messages" class="chat-body">
+            <!-- Zprávy -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-text" placeholder="Zpráva...">
+            <button onclick="DarknetApp.sendMessage()">SEND</button>
+        </div>
+    </div>
+</div>
+
+<script src="nui://aprts_tablet_darknet/web/script.js"></script>

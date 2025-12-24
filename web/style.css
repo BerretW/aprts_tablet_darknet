@@ -1,0 +1,149 @@
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.darknet-wrapper {
+    width: 100%; height: 100%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    background-image: radial-gradient(#222 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* Header */
+.header {
+    padding: 15px;
+    border-bottom: 2px solid #d63031;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+}
+.logo {
+    font-size: 20px;
+    color: #d63031;
+    font-weight: bold;
+    text-shadow: 0 0 5px #d63031;
+}
+.rep-box {
+    text-align: right;
+}
+.rep-box small { color: #aaa; display: block; font-size: 9px; }
+.rep-box span { color: #d63031; font-size: 20px; font-weight: bold; }
+
+/* Navigace */
+.nav {
+    display: flex;
+    background: #222;
+}
+.nav-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #aaa;
+    padding: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    transition: 0.2s;
+}
+.nav-btn:hover { background: #333; color: white; }
+.nav-btn.active { border-bottom: 3px solid #d63031; color: white; background: #1a1a1a; }
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Karty Jobů */
+.job-card {
+    background: rgba(30,30,30,0.9);
+    border: 1px solid #333;
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    border-left: 4px solid #555;
+}
+.job-card.unlocked { border-left-color: #d63031; }
+.job-card.active-job { border-left-color: #00b894; border: 1px solid #00b894; }
+
+.job-title { font-weight: bold; color: #fff; font-size: 16px; margin-bottom: 5px; }
+.job-desc { font-size: 12px; color: #aaa; margin-bottom: 10px; }
+.job-reward { font-size: 11px; color: #d63031; }
+.job-price { float: right; color: #00b894; font-weight: bold; }
+
+.btn {
+    background: #d63031;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.btn:disabled { background: #333; color: #555; cursor: not-allowed; }
+.btn:hover:not(:disabled) { background: #ff7675; }
+
+.btn-chat { background: #0984e3; width: 100%; margin-top: 10px; }
+.btn-delete { background: transparent; border: 1px solid #d63031; color: #d63031; font-size: 10px; }
+
+/* Formulář na novou zakázku */
+.new-job-form {
+    border: 1px dashed #555;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.input-dark {
+    width: 100%;
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+/* Chat Modal */
+.chat-modal {
+    position: absolute;
+    top: 50px; left: 20px; right: 20px; bottom: 20px;
+    background: #111;
+    border: 2px solid #0984e3;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+.chat-header {
+    background: #0984e3;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.5);
+}
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background: #222;
+}
+.chat-input input { flex: 1; background: #000; border: 1px solid #333; color: white; padding: 5px; }
+
+/* Zprávy */
+.msg { margin-bottom: 8px; padding: 5px 10px; border-radius: 4px; max-width: 80%; word-wrap: break-word; font-size: 12px; }
+.msg.left { background: #333; float: left; clear: both; }
+.msg.right { background: #0984e3; float: right; clear: both; text-align: right; }
