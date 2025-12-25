@@ -17,7 +17,8 @@ server_script 'server.lua'
 client_scripts {
     'missions/delivery/client.lua',
     'missions/heist/client.lua',
-    'missions/drug_sale/client.lua' -- NOVÉ
+    'missions/drug_sale/client.lua',
+    'missions/car_theft/client.lua'
 }
 
 files {

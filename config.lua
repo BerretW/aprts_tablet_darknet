@@ -74,4 +74,34 @@ Config.Jobs = {
         animDict = "mp_common",
         animClip = "givetake2_a"
     },
+    ['steal_luxury_car'] = {
+        label = "Krádež: Luxusní auto (Del Perro)",
+        description = "Ukradni luxusní vozidlo zaparkované u pláže Del Perro. Klíče má majitel poblíž.",
+        minReputation = 50,
+        repReward = 40,
+        payout = 7500,
+
+        type = "car_theft", -- Odkazuje na missions/car_theft/client.lua
+
+        -- Parametry mise
+        ownerLocation = vector3(-1503.62, -450.78, 35.88), -- Kde najít NPC majitele/klíče
+        ownerRadius = 10.0, -- Oblast, kde se NPC nachází (pokud je dynamické)
+        vehicleModel = GetHashKey("zentorno"), -- Model auta k ukradení
+        vehicleSpawnCoords = vector3(-1510.15, -455.05, 3.42), -- Kde je auto zaparkované
+        vehicleHeading = 180.0, -- Směr, kterým auto spakwnuje
+        hasTracker = true, -- Jestli má auto tracker, který je potřeba odstranit
+        resprayLocation = vector3(730.0, -1083.5, 22.18), -- Kde je lakovna/chop shop pro změnu barvy
+        dropoffLocation = vector3(-123.6, -1690.8, 34.02), -- Konečné místo doručení
+        
+        -- Volitelné itemy a časy
+        requiredItemHotwire = GetHashKey("lockpick"), -- Může vyžadovat lockpick pro hotwiring
+        hotwireDuration = 5000, -- Doba hotwiringu
+        trackerDisableDuration = 7000, -- Doba deaktivace trackeru
+        resprayDuration = 3000, -- Doba přelakování
+        
+        animDictKeys = "mp_common",
+        animClipKeys = "givetake2_a",
+        animDictHotwire = "anim@amb@club_seating@",
+        animClipHotwire = "base" 
+    },
 }
