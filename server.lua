@@ -1,4 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+-- [NOVÉ] Tabulka pro validaci, zda hráč misi opravdu dělá
+local ActiveSystemJobs = {}
 
 -- ==============================================================================
 -- 1. ZÍSKÁNÍ DAT (Router)
@@ -47,6 +49,9 @@ RegisterNetEvent('aprts_darknet:server:tryStartSystemJob', function(jobId, clien
     local currentRep = repResult and repResult.reputation or 0
 
     if currentRep >= jobCfg.minReputation then
+        -- [NOVÉ] Uložíme si, že tento hráč dělá tuto misi
+        ActiveSystemJobs[src] = jobId
+        
         TriggerClientEvent('aprts_darknet:client:startSystemJob', src, jobId)
     else
         TriggerClientEvent('ox_lib:notify', src, {type='error', description='Nedostatečná reputace zařízení.'})
@@ -196,16 +201,24 @@ RegisterNetEvent('aprts_darknet:server:claimSystemReward', function(jobId, clien
 
     if not serial or not jobCfg then return end
 
-    -- Získáme hráče pro výplatu peněz
+    -- [NOVÉ] BEZPEČNOSTNÍ KONTROLA
+    -- Pokud server neví, že hráč tuto misi začal, okamžitě končíme (pravděpodobně cheater)
+    if ActiveSystemJobs[src] ~= jobId then
+        print(string.format("^1[Darknet Security] Hráč ID %s se pokusil vyplatit misi '%s', ale neměl ji aktivní!^0", src, jobId))
+        return 
+    end
+
+    -- [NOVÉ] Vymažeme misi z aktivních, aby ji nešlo vyplatit 2x
+    ActiveSystemJobs[src] = nil
+
+    -- Zbytek kódu zůstává stejný...
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
 
-    -- 1. Připsat reputaci tabletu
     exports.oxmysql:execute('INSERT INTO tablet_darknet_rep (tablet_serial, reputation) VALUES (?, ?) ON DUPLICATE KEY UPDATE reputation = reputation + ?', {
         serial, jobCfg.repReward, jobCfg.repReward
     })
 
-    -- 2. Dát peníze hráči
     if jobCfg.payout and jobCfg.payout > 0 then
         Player.Functions.AddMoney('cash', jobCfg.payout, "darknet-job")
     end
